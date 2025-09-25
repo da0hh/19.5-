@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <fstream>
+#include <cstring>
+
+using namespace std;
+
+int finder(const string &word){
+    try {
+        std::ifstream dates("C:\\Users\\nikit\\projects\\main\\dates.txt"); 
+        vector<string> vec;
+        int count = 0, howMuch = 0;
+
+        if (!dates.is_open()) {
+            throw runtime_error("Ошибка при открытии файла!");
+        }
+
+        while (!dates.eof()) {
+            string temp;
+            dates >> temp;
+            vec.push_back(temp);
+            count++;
+        }
+
+        for (const string& str : vec) {
+            if (_stricmp(str.c_str(), word.c_str()) == 0) {
+                howMuch++;
+            }
+        }
+
+        dates.close();
+    
+        if (howMuch > 0)
+            return howMuch;
+        else
+            return 0;
+    }
+    catch (const exception& e) {
+        cerr << "Произошла ошибка: " << e.what() << endl;
+        return 0;
+    }
+}
+
+
+int main() {
+    setlocale(LC_ALL, "RU");
+    string word;
+    
+    cout << "Enter needed word: "; cin >> word;
+
+    if (finder(word) > 0)
+        cout << "True, " << finder(word) << endl;
+    else cout << "False" << endl;
+}
