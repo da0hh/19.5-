@@ -8,20 +8,25 @@ using namespace std;
 int main() {
     setlocale(LC_ALL, "RU");
     ifstream dates("names&pays.txt");
-    int summ = 0, salary;
-    string line;
-
+    int summ = 0;
+    string line, name;
+    int salary;
+    
     if (!dates.is_open()) {
         cerr << "Ошибка открытия файла\n";
         return 1;
     }
-
-    while (getline(dates, line)) {
-        size_t pos = line.find_first_of("0123456789");
-        if (pos != string::npos) {
-            string salaryStr = line.substr(pos);
-            salary = stoi(salaryStr);
-            summ += salary;
+    
+    while (getline(dates, line)) {  // Читаем строку целиком
+        stringstream ss(line);      // Создаем поток для разбора строки
+        
+        // Пропускаем имя (читаем все слова до числа)
+        while (ss >> name) {
+            if (isdigit(name[0])) {  // Если нашли число
+                ss >> salary;        // Читаем зарплату
+                summ += salary;      // Добавляем к сумме
+                break;              // Переходим к следующей строке
+            }
         }
     }
 
