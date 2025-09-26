@@ -26,8 +26,11 @@ void finder(const string &way){
 int main() {
     setlocale(LC_ALL, "RU");
     string way;
-    
+
     cout << "Enter needed word: "; cin >> way;
 
+    if (way.empty()) 
+        cerr << ("Введены неверные параметры"); 
     finder(way);
+
 }
