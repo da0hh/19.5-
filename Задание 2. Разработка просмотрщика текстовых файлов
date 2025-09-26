@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <fstream>
+#include <cstring>
+
+using namespace std;
+
+void finder(const string &way){
+    vector<string> vec;
+    string temp;
+    std::ifstream dates(way);
+    if (!dates.is_open())
+        throw runtime_error("Ошибка в открытии файла");
+    while (!dates.eof()) {
+        dates >> temp;
+        vec.push_back(temp);
+    }
+    for (int i = 0; i < vec.size(); i++) {
+        cout << vec[i];
+    }
+}
+
+
+int main() {
+    setlocale(LC_ALL, "RU");
+    string way;
+    
+    cout << "Enter needed word: "; cin >> way;
+
+    finder(way);
+}
