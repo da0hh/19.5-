@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "RU");
+    ifstream dates("names&pays.txt");
+    int summ = 0, salary;
+    string line;
+
+    if (!dates.is_open()) {
+        cerr << "Ошибка открытия файла\n";
+        return 1;
+    }
+
+    while (getline(dates, line)) {
+        size_t pos = line.find_first_of("0123456789");
+        if (pos != string::npos) {
+            string salaryStr = line.substr(pos);
+            salary = stoi(salaryStr);
+            summ += salary;
+        }
+    }
+
+    cout << "Сумма зарплат: " << summ << endl;
+    return 0;
+}
