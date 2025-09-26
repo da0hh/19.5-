@@ -31,5 +31,4 @@ int main() {
     }
 
     cout << "Сумма зарплат: " << summ << endl;
-    return 0;
 }
