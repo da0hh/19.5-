@@ -12,7 +12,7 @@ void finder(const string &way){
     string temp;
     std::ifstream dates(way);
     if (!dates.is_open())
-        throw runtime_error("Ошибка в открытии файла");
+        cerr << ("Ошибка в открытии файла");
     while (!dates.eof()) {
         dates >> temp;
         vec.push_back(temp);
